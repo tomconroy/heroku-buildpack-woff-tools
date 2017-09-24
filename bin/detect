@@ -1,0 +1,5 @@
+#!/usr/bin/env vash
+# bin/detect <build-dir>
+
+echo "woff2"
+exit 0

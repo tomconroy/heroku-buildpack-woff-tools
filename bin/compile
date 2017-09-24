@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+set -e
+
+cd $1
+
+echo "-----> Cloning google/woff2"
+git clone --recursive https://github.com/google/woff2.git
+cd woff2
+echo "-----> Compiling woff2"
+make clean all
