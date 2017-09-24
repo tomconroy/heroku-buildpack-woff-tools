@@ -1,4 +1,4 @@
-#!/usr/bin/env vash
+#!/usr/bin/env bash
 # bin/detect <build-dir>
 
 echo "woff2"
