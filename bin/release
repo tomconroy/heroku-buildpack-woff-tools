@@ -3,4 +3,4 @@
 
 echo "---"
 echo "config_vars:"
-echo "  PATH: $PATH:/app/woff2"
+echo "  PATH: $PATH:/app/woff2:/app/sfnt2woff"

@@ -3,10 +3,16 @@
 
 set -e
 
-cd $1
-
 echo "-----> Cloning google/woff2"
+cd $1
 git clone --recursive https://github.com/google/woff2.git
 cd woff2
 echo "-----> Compiling woff2"
 make clean all
+
+echo "-----> Cloning sfnt2woff"
+cd $1
+git clone https://github.com/samboy/WOFF.git sfnt2woff
+cd sfnt2woff
+echo "-----> Compiling sfnt2woff"
+make
