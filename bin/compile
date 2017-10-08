@@ -7,6 +7,7 @@ echo "-----> Cloning google/woff2"
 cd $1
 git clone --recursive https://github.com/google/woff2.git
 cd woff2
+git reset --hard 53846e1861e713c4fdcfea98492aef24f265e9e5
 echo "-----> Compiling woff2"
 make clean all
 
