@@ -1,6 +1,2 @@
 #!/usr/bin/env bash
 # bin/release
-
-echo "---"
-echo "config_vars:"
-echo "  PATH: $PATH:/app/woff2:/app/sfnt2woff"
