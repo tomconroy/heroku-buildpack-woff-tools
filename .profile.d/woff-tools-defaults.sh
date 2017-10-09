@@ -1,1 +1,1 @@
-PATH=$PATH:$HOME/woff2:$HOME/sfnt2woff
+export PATH=$PATH:$HOME/woff2:$HOME/sfnt2woff
