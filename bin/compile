@@ -17,3 +17,7 @@ git clone https://github.com/samboy/WOFF.git sfnt2woff
 cd sfnt2woff
 echo "-----> Compiling sfnt2woff"
 make
+
+echo "-----> Adding .profile.d script"
+mkdir -p $1/.profile.d
+echo 'PATH=$PATH:$HOME/woff2:$HOME/sfnt2woff' > $1/.profile.d/woff-tools.sh
