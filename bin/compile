@@ -8,16 +8,16 @@ set -v
 mkdir -p $2
 
 WOFF2_CACHE_DIR=$2/woff2
-WOFF2_BIN_DIR=$HOME/woff2
+WOFF2_BIN_DIR=$1/woff2
 mkdir -p $WOFF2_BIN_DIR
 
-#if [ -d "$WOFF2_CACHE_DIR" ]; then
-    #echo "-----> Restoring woff2 from cache"
-    #cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
-#else
+if [ -d "$WOFF2_CACHE_DIR" ]; then
+    echo "-----> Restoring woff2 from cache"
+    echo "$(ls -l $WOFF2_CACHE_DIR)"
+    cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
+else
     echo "-----> Cloning google/woff2"
     WOFF2_BUILD_DIR=/tmp/woff2
-    cd $1
     git clone --recursive https://github.com/google/woff2.git $WOFF2_BUILD_DIR
     cd $WOFF2_BUILD_DIR
     git reset --hard 53846e1861e713c4fdcfea98492aef24f265e9e5
@@ -26,12 +26,12 @@ mkdir -p $WOFF2_BIN_DIR
     mkdir -p $WOFF2_CACHE_DIR
     cp woff2_* $WOFF2_CACHE_DIR
     cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
-#fi
+fi
 
 
 
 SFNT2WOFF_CACHE_DIR=$2/sfnt2woff
-SFNT2WOFF_BIN_DIR=$HOME/sfnt2woff
+SFNT2WOFF_BIN_DIR=$1/sfnt2woff
 mkdir -p $SFNT2WOFF_BIN_DIR
 if [ -d "$SFNT2WOFF_CACHE_DIR" ]; then
     echo "-----> Restoring sfnt2woff from cache"
@@ -51,7 +51,7 @@ fi
 
 
 TTF_CACHE_DIR=$2/ttfautohint-build
-TTF_BIN_DIR=$HOME/ttfautohint-build/local/bin
+TTF_BIN_DIR=$1/ttfautohint-build/local/bin
 mkdir -p $TTF_BIN_DIR
 if [ -d "$TTF_CACHE_DIR" ]; then
     echo "-----> Restoring cache"
@@ -68,7 +68,7 @@ else
     cp -r $TTF_BIN_DIR $TTF_CACHE_DIR
 fi
 
-echo "$(ls $HOME)"
+echo "$(ls $1)"
 echo "$(ls $WOFF2_BIN_DIR)"
 echo "$(ls $SFNT2WOFF_BIN_DIR)"
 echo "$(ls $TTF_BIN_DIR)"
