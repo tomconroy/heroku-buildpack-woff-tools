@@ -5,13 +5,26 @@ set -e
 
 mkdir -p $2
 
-echo "-----> Cloning google/woff2"
-cd $1
-git clone --recursive https://github.com/google/woff2.git
-cd woff2
-git reset --hard 53846e1861e713c4fdcfea98492aef24f265e9e5
-echo "-----> Compiling woff2"
-make clean all
+WOFF2_CACHE_DIR=$2/woff2
+WOFF2_BIN_DIR=$HOME/woff2
+mkdir -p $WOFF2_BIN_DIR
+if [ -d "$WOFF2_CACHE_DIR" ]; then
+    echo "-----> Restoring woff2 from cache"
+    cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
+else
+    echo "-----> Cloning google/woff2"
+    WOFF2_BUILD_DIR=/tmp/woff2
+    cd $1
+    git clone --recursive https://github.com/google/woff2.git $WOFF2_BUILD_DIR
+    cd $WOFF2_BUILD_DIR
+    git reset --hard 53846e1861e713c4fdcfea98492aef24f265e9e5
+    echo "-----> Compiling woff2"
+    make clean all
+    cp woff2_* $WOFF2_CACHE_DIR
+    cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
+fi
+
+
 
 echo "-----> Cloning sfnt2woff"
 cd $1
@@ -21,18 +34,18 @@ echo "-----> Compiling sfnt2woff"
 make
 
 
-echo "-----> Cloning ttfautohint-build"
 TTF_CACHE_DIR=$2/ttfautohint-build
 TTF_BIN_DIR=$HOME/
 if [ -d "$TTF_CACHE_DIR" ]; then
     echo "-----> Restoring cache"
     cp -r $TTF_CACHE_DIR $HOME/ttfautohint-build/local/bin
 else
-    echo "-----> Building from source"
+    echo "-----> Cloning ttfautohint-build"
     TMP_DIR=/tmp/ttfautohint-build
     cd $1
     git clone https://github.com/source-foundry/ttfautohint-build $TMP_DIR
     cd $TMP_DIR
+    echo "-----> Building ttfautohint"
     make
     mkdir -p $TTF_CACHE_DIR
     cp -r $HOME/ttfautohint-build/local/bin $TTF_CACHE_DIR
