@@ -50,8 +50,8 @@ else
 fi
 
 
-TTF_CACHE_DIR=$2/ttfautohint-build
-TTF_BIN_DIR=$1/ttfautohint-build/local/bin
+TTF_CACHE_DIR=$2/ttfautohint
+TTF_BIN_DIR=$1/ttfautohint
 mkdir -p $TTF_BIN_DIR
 if [ -d "$TTF_CACHE_DIR" ]; then
     echo "-----> Restoring cache"
@@ -64,6 +64,8 @@ else
     cd $TMP_DIR
     echo "-----> Building ttfautohint"
     make
+    # make puts files in $HOME/ttfautohint-build/local/bin
+    cp -r $HOME/ttfautohint-build/local/bin $TTF_BIN_DIR
     mkdir -p $TTF_CACHE_DIR
     cp -r $TTF_BIN_DIR $TTF_CACHE_DIR
 fi
