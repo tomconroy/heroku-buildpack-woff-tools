@@ -30,12 +30,24 @@ fi
 
 
 
-echo "-----> Cloning sfnt2woff"
-cd $1
-git clone https://github.com/samboy/WOFF.git sfnt2woff
-cd sfnt2woff
-echo "-----> Compiling sfnt2woff"
-make
+SFNT2WOFF_CACHE_DIR=$2/sfnt2woff
+SFNT2WOFF_BIN_DIR=$HOME/sfnt2woff
+mkdir -p $SFNT2WOFF_BIN_DIR
+if [ -d "$SFNT2WOFF_CACHE_DIR" ]; then
+    echo "-----> Restoring sfnt2woff from cache"
+    cp -r $SFNT2WOFF_CACHE_DIR $SFNT2WOFF_BIN_DIR
+else
+    echo "-----> Cloning sfnt2woff"
+    SFNT2WOFF_BUILD_DIR=/tmp/sfnt2woff
+    git clone https://github.com/samboy/WOFF.git $SFNT2WOFF_BUILD_DIR
+    cd $SFNT2WOFF_BUILD_DIR
+    echo "-----> Compiling sfnt2woff"
+    make
+    mkdir -p $SFNT2WOFF_CACHE_DIR
+    cp sfnt2woff $SFNT2WOFF_CACHE_DIR
+    cp woff2sfnt $SFNT2WOFF_CACHE_DIR
+    cp -r $SFNT2WOFF_CACHE_DIR $SFNT2WOFF_BIN_DIR
+fi
 
 
 TTF_CACHE_DIR=$2/ttfautohint-build
