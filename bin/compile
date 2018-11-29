@@ -6,6 +6,7 @@ set -e
 mkdir -p $2
 
 WOFF2_CACHE_DIR=$2/woff2
+mkdir -p $WOFF2_CACHE_DIR
 WOFF2_BIN_DIR=$HOME/woff2
 mkdir -p $WOFF2_BIN_DIR
 if [ -d "$WOFF2_CACHE_DIR" ]; then
