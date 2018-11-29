@@ -18,6 +18,15 @@ cd sfnt2woff
 echo "-----> Compiling sfnt2woff"
 make
 
+
+echo "-----> Cloning ttfautohint-build"
+TMP_DIR=/tmp/ttfautohint-build
+cd $1
+git clone https://github.com/source-foundry/ttfautohint-build $TMP_DIR
+cd $TMP_DIR
+make
+
+
 echo "-----> Adding .profile.d script"
 mkdir -p $1/.profile.d
-echo 'PATH=$PATH:$HOME/woff2:$HOME/sfnt2woff' > $1/.profile.d/woff-tools.sh
+echo 'PATH=$PATH:$HOME/woff2:$HOME/sfnt2woff:$HOME/ttfautohint-build/local/bin' > $1/.profile.d/woff-tools.sh
