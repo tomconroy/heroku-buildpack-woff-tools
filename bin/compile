@@ -11,7 +11,9 @@ WOFF2_BIN_DIR=$HOME/woff2
 mkdir -p $WOFF2_BIN_DIR
 if [ -d "$WOFF2_CACHE_DIR" ]; then
     echo "-----> Restoring woff2 from cache"
+    echo "$(ls $WOFF2_CACHE_DIR)"
     cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
+    echo "$(ls $HOME)"
 else
     echo "-----> Cloning google/woff2"
     WOFF2_BUILD_DIR=/tmp/woff2
