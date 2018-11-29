@@ -8,14 +8,12 @@ set -v
 mkdir -p $2
 
 WOFF2_CACHE_DIR=$2/woff2
-mkdir -p $WOFF2_CACHE_DIR
 WOFF2_BIN_DIR=$HOME/woff2
 mkdir -p $WOFF2_BIN_DIR
+
 if [ -d "$WOFF2_CACHE_DIR" ]; then
     echo "-----> Restoring woff2 from cache"
-    echo "$(ls $WOFF2_CACHE_DIR)"
     cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
-    echo "$(ls $HOME)"
 else
     echo "-----> Cloning google/woff2"
     WOFF2_BUILD_DIR=/tmp/woff2
@@ -25,6 +23,7 @@ else
     git reset --hard 53846e1861e713c4fdcfea98492aef24f265e9e5
     echo "-----> Compiling woff2"
     make clean all
+    mkdir -p $WOFF2_CACHE_DIR
     cp woff2_* $WOFF2_CACHE_DIR
     cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
 fi
@@ -40,10 +39,11 @@ make
 
 
 TTF_CACHE_DIR=$2/ttfautohint-build
-TTF_BIN_DIR=$HOME/
+TTF_BIN_DIR=$HOME/ttfautohint-build/local/bin
+mkdir -p $TTF_BIN_DIR
 if [ -d "$TTF_CACHE_DIR" ]; then
     echo "-----> Restoring cache"
-    cp -r $TTF_CACHE_DIR $HOME/ttfautohint-build/local/bin
+    cp -r $TTF_CACHE_DIR $TTF_BIN_DIR
 else
     echo "-----> Cloning ttfautohint-build"
     TMP_DIR=/tmp/ttfautohint-build
