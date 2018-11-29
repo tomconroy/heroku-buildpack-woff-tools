@@ -14,7 +14,7 @@ mkdir -p $WOFF2_BIN_DIR
 if [ -d "$WOFF2_CACHE_DIR" ]; then
     echo "-----> Restoring woff2 from cache"
     echo "$(ls -l $WOFF2_CACHE_DIR)"
-    cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
+    cp -r $WOFF2_CACHE_DIR/* $WOFF2_BIN_DIR
 else
     echo "-----> Cloning google/woff2"
     WOFF2_BUILD_DIR=/tmp/woff2
@@ -25,7 +25,7 @@ else
     make clean all
     mkdir -p $WOFF2_CACHE_DIR
     cp woff2_* $WOFF2_CACHE_DIR
-    cp -r $WOFF2_CACHE_DIR $WOFF2_BIN_DIR
+    cp -r $WOFF2_CACHE_DIR/* $WOFF2_BIN_DIR
 fi
 
 
@@ -35,7 +35,7 @@ SFNT2WOFF_BIN_DIR=$1/sfnt2woff
 mkdir -p $SFNT2WOFF_BIN_DIR
 if [ -d "$SFNT2WOFF_CACHE_DIR" ]; then
     echo "-----> Restoring sfnt2woff from cache"
-    cp -r $SFNT2WOFF_CACHE_DIR $SFNT2WOFF_BIN_DIR
+    cp -r $SFNT2WOFF_CACHE_DIR/* $SFNT2WOFF_BIN_DIR
 else
     echo "-----> Cloning sfnt2woff"
     SFNT2WOFF_BUILD_DIR=/tmp/sfnt2woff
@@ -46,7 +46,7 @@ else
     mkdir -p $SFNT2WOFF_CACHE_DIR
     cp sfnt2woff $SFNT2WOFF_CACHE_DIR
     cp woff2sfnt $SFNT2WOFF_CACHE_DIR
-    cp -r $SFNT2WOFF_CACHE_DIR $SFNT2WOFF_BIN_DIR
+    cp -r $SFNT2WOFF_CACHE_DIR/* $SFNT2WOFF_BIN_DIR
 fi
 
 
@@ -55,7 +55,7 @@ TTF_BIN_DIR=$1/ttfautohint
 mkdir -p $TTF_BIN_DIR
 if [ -d "$TTF_CACHE_DIR" ]; then
     echo "-----> Restoring cache"
-    cp -r $TTF_CACHE_DIR $TTF_BIN_DIR
+    cp -r $TTF_CACHE_DIR/* $TTF_BIN_DIR
 else
     echo "-----> Cloning ttfautohint-build"
     TMP_DIR=/tmp/ttfautohint-build
@@ -67,7 +67,7 @@ else
     # make puts files in $HOME/ttfautohint-build/local/bin
     cp -r $HOME/ttfautohint-build/local/bin $TTF_BIN_DIR
     mkdir -p $TTF_CACHE_DIR
-    cp -r $TTF_BIN_DIR $TTF_CACHE_DIR
+    cp -r $TTF_BIN_DIR/* $TTF_CACHE_DIR
 fi
 
 echo "$(ls $1)"
