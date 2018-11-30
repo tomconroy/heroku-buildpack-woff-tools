@@ -26,7 +26,6 @@ else
     mkdir -p $WOFF2_CACHE_DIR
     cp woff2_* $WOFF2_CACHE_DIR
     cp -r $WOFF2_CACHE_DIR/* $WOFF2_BIN_DIR
-    sudo chown -R root $WOFF2_BIN_DIR
 fi
 
 
@@ -37,7 +36,6 @@ mkdir -p $SFNT2WOFF_BIN_DIR
 if [ -d "$SFNT2WOFF_CACHE_DIR" ]; then
     echo "-----> Restoring sfnt2woff from cache"
     cp -r $SFNT2WOFF_CACHE_DIR/* $SFNT2WOFF_BIN_DIR
-    sudo chown -R root $SFNT2WOFF_BIN_DIR
 else
     echo "-----> Cloning sfnt2woff"
     SFNT2WOFF_BUILD_DIR=/tmp/sfnt2woff
@@ -58,7 +56,6 @@ mkdir -p $TTF_BIN_DIR
 if [ -d "$TTF_CACHE_DIR" ]; then
     echo "-----> Restoring cache"
     cp -r $TTF_CACHE_DIR/* $TTF_BIN_DIR
-    sudo chown -R root $TTF_BIN_DIR
 else
     echo "-----> Cloning ttfautohint-build"
     TMP_DIR=/tmp/ttfautohint-build
@@ -75,4 +72,4 @@ fi
 
 echo "-----> Adding .profile.d script"
 mkdir -p $1/.profile.d
-echo 'PATH=$PATH:'"$WOFF2_BIN_DIR:$SFNT2WOFF_BIN_DIR:$TTF_BIN_DIR" > $1/.profile.d/woff-tools.sh
+echo 'PATH=$PATH:$HOME/woff2:$HOME/sfnt2woff:$HOME/ttfautohint' > $1/.profile.d/woff-tools.sh
