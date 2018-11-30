@@ -53,10 +53,10 @@ fi
 TTF_CACHE_DIR=$2/ttfautohint-cache
 TTF_BIN_DIR=$1/ttfautohint
 mkdir -p $TTF_BIN_DIR
-#if [ -d "$TTF_CACHE_DIR" ]; then
-    #echo "-----> Restoring cache"
-    #cp -r $TTF_CACHE_DIR/* $TTF_BIN_DIR
-#else
+if [ -d "$TTF_CACHE_DIR" ]; then
+    echo "-----> Restoring cache"
+    cp -r $TTF_CACHE_DIR/* $TTF_BIN_DIR
+else
     echo "-----> Cloning ttfautohint-build"
     TMP_DIR=/tmp/ttfautohint-build
     cd $1
@@ -68,8 +68,8 @@ mkdir -p $TTF_BIN_DIR
     cp -r $HOME/ttfautohint-build/local/bin/* $TTF_BIN_DIR
     mkdir -p $TTF_CACHE_DIR
     cp -r $TTF_BIN_DIR/* $TTF_CACHE_DIR
-#fi
+fi
 
 echo "-----> Adding .profile.d script"
 mkdir -p $1/.profile.d
-echo 'PATH=$PATH:$WOFF2_BIN_DIR:$SFNT2WOFF_BIN_DIR:$TTF_BIN_DIR' > $1/.profile.d/woff-tools.sh
+echo 'PATH=$PATH:'"$WOFF2_BIN_DIR:$SFNT2WOFF_BIN_DIR:$TTF_BIN_DIR" > $1/.profile.d/woff-tools.sh
