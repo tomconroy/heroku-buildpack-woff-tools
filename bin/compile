@@ -50,7 +50,7 @@ else
 fi
 
 
-TTF_CACHE_DIR=$2/ttfautohint
+TTF_CACHE_DIR=$2/ttfautohint-cache
 TTF_BIN_DIR=$1/ttfautohint
 mkdir -p $TTF_BIN_DIR
 #if [ -d "$TTF_CACHE_DIR" ]; then
